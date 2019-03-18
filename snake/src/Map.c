@@ -22,14 +22,14 @@ void initMap()
 
     if (map.row<5 || map.col<5)
     {
-        perror("window is too small !");
-        exit(0);
+        perror("Error: window is too small !");
+        exit(-1);
     }
     /** 为每个像素点分配内存 **/
-    map.pixel = (char **) calloc(map.col, sizeof(char *));
-    for (int i = 0; i<map.col; ++i)
+    map.pixel = (char **) calloc(map.row, sizeof(char *));
+    for (int i = 0; i<map.row; ++i)
     {
-        *(map.pixel+i) = (char *) malloc(sizeof(char)*map.row);
+        *(map.pixel+i) = (char *) calloc(map.col, sizeof(char));
     }
     map.show = show_map;
 
@@ -47,16 +47,17 @@ void initMap()
 void clearMap()
 {
     // 如果地图不存在，直接返回
-    if (map.exist != true)
+    if (map.exist != true || map.pixel == NULL)
     {
         return;
     }
     /* 回收像素内存 */
-    for (int i = 0; i<map.col; ++i)
-    {
-        free(map.pixel[i]);
-        map.pixel[i] = NULL;
-    }
+//     https://www.imooc.com/wenda/detail/521776
+//    for (int i = 0; i<map.col; ++i)
+//    {
+//        free(map.pixel[i]);
+//        map.pixel[i] = NULL;
+//    }
     free(map.pixel);
     map.pixel = NULL;
     map.exist = false;
@@ -77,7 +78,7 @@ void outputPixel()
     {
         for (int k = 0; k<map.col; ++k)
         {
-            char c = *(*(map.pixel+k)+j);
+            char c = *(*(map.pixel+j)+k);
             if (c == '\0')
             {
                 printf(" ");
@@ -107,5 +108,5 @@ void show_map()
     printf("col:%d : ", map.col);
     printf("\n");
 
-    sleep(3);
+    sleep(1);
 }

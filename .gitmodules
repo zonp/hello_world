@@ -1,0 +1,3 @@
+[submodule "snake"]
+	path = snake
+	url = git@zonp.github.com:zonp/Snake.git

@@ -20,6 +20,11 @@ void initMap()
     map.topX = 0;
     map.topY = 0;
 
+    if (map.row<5 || map.col<5)
+    {
+        perror("window is too small !");
+        exit(0);
+    }
     /** 为每个像素点分配内存 **/
     map.pixel = (char **) calloc(map.col, sizeof(char *));
     for (int i = 0; i<map.col; ++i)
@@ -90,7 +95,7 @@ void show_map()
 {
     char *str = "hello world!";
     size_t len = strlen(str);
-    for (int y = 6, x = 35, n = 0; n<len; n++)
+    for (int y = map.col/2, x = map.row*2/5, n = 0; n<len; n++)
     {
         *(*(map.pixel+x+n)+y) = str[n];
     }

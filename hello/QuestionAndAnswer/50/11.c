@@ -5,7 +5,7 @@
 int main()
 {
 	int num;
-	printf("please input a integer, I will determine that is posistive number, negative number, odd number or even number ???\n");
+	printf("please input a integer, \nI will determine that is posistive number, negative number, odd number or even number ???\n");
 
 	scanf("%d", &num);
 	

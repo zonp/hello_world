@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 int main(int argc, char *argv[])
 {
 	double i = 20.0;
